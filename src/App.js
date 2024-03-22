@@ -3,12 +3,15 @@ import data from "./assets/data.json";
 import { useState } from "react";
 import CommentBox from "./components/CommentBox";
 import Comment from "components/Comment";
+import { getLocalComments, setLocalComments } from './model/Comments.js';
 
 function App() {
   data.comments = data.comments.sort((b, a) => a.score - b.score);
 
-  const [comments, setComments] = useState(data.comments);
-  const { currentUser } = data;
+  const localComments = getLocalComments();
+
+  const [comments, setComments] = useState(localComments.comments);
+  const { currentUser } = localComments;
 
   const updateCommentPosition = (comment) => {
     comments.forEach((item, index) => {
@@ -18,11 +21,13 @@ function App() {
     });
     let sortedComments = comments.sort((a, b) => b.score - a.score);
     setComments([...sortedComments]);
+    setLocalComments(comments);
   };
 
   const addComment = (newComment) => {
     comments.push(newComment);
     setComments([...comments]);
+    setLocalComments(comments);
   };
 
   const updateComment = (comment) => {
@@ -32,6 +37,7 @@ function App() {
       }
     });
     setComments([...comments]);
+    setLocalComments(comments);
   };
 
   return (
