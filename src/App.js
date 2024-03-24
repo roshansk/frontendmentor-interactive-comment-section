@@ -48,7 +48,7 @@ function App() {
     <div className="App container h-screen w-screen mx-auto flex flex-col py-4 items-center justify-center">
       <div
         id="comment-section-wrapper"
-        className="w-[90%] h-max-[560px] flex flex-col overflow-y-scroll mx-auto"
+        className="w-[90%] h-max-[560px] flex flex-col overflow-y-scroll mx-auto items-end"
       >
         {comments.map((comment, index) => (
           <Comment
@@ -61,11 +61,13 @@ function App() {
           />
         ))}
       </div>
-      <CommentBox
-        comments={comments}
-        currentUser={currentUser}
-        addComment={addComment}
-      />
+      <div id="comment-box-wrapper" className="w-[90%] mt-3">
+        <CommentBox
+          comments={comments}
+          currentUser={currentUser}
+          submitHandler={addComment}
+        />
+      </div>
     </div>
   );
 }

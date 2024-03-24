@@ -7,6 +7,7 @@ function Comment(props) {
   const { updateCommentPosition, updateComment, currentUser, comment } = props;
   const { replies = [] } = comment;
   const [editing, setEditing] = useState(false);
+  const [replying, setReplying] = useState(false);
 
   let newCreatedAt = timeAgo(comment.createdAt);
 
@@ -28,14 +29,26 @@ function Comment(props) {
   };
 
   const addReply = (reply) => {
+    setReplying(true);
     reply.replyingTo = comment.user.username;
     comment.replies.push(reply);
     updateComment(comment);
-    handleEditing();
+    setReplying(!replying);
   };
 
-  const handleEditing = () => {
+  const handleEditComment = (newCommentValue) => {
+    if (false) return;
+    comment.content = newCommentValue;
+    updateComment(comment);
+    setEditing(false);
+  };
+
+  const onEdit = () => {
     setEditing(!editing);
+  };
+
+  const onReply = () => {
+    setReplying(!replying);
   };
 
   const CommentBlock = (
@@ -75,13 +88,14 @@ function Comment(props) {
           label="Edit"
           icon="/images/icon-edit.svg"
           btnClass="blue-accent-text font-bold"
+          action={onEdit}
           isVisible={currentUser.username === comment.user.username}
         />
         <ButtonWithIcon
           label="Reply"
           icon="/images/icon-reply.svg"
           btnClass="blue-accent-text font-bold"
-          action={handleEditing}
+          action={onReply}
           isVisible={currentUser.username !== comment.user.username}
         />
       </div>
@@ -90,17 +104,17 @@ function Comment(props) {
 
   return (
     <>
-      {editing ? (
-        <div className="">
-          <CommentBox
-            currentUser={currentUser}
-            addComment={addReply}
-            isReply={true}
-          />
-        </div>
-      ) : (
-        CommentBlock
-      )}
+      {!editing ? CommentBlock : null}
+
+      {editing || replying ? (
+        <CommentBox
+          currentUser={currentUser}
+          submitHandler={editing ? handleEditComment : addReply}
+          currentComment={comment.content}
+          isReply={replying ? true : false}
+        />
+      ) : null}
+
       {replies.length ? (
         <div className="reply-wrapper w-[95%] ml-auto">
           {replies.map((reply, index) => (
