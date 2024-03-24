@@ -3,15 +3,19 @@ import data from "./assets/data.json";
 import { useState } from "react";
 import CommentBox from "./components/CommentBox";
 import Comment from "components/Comment";
-import { getLocalComments, setLocalComments } from './model/Comments.js';
+import {
+  getLocalComments,
+  setLocalComments,
+  getCurrentUser,
+} from "./model/Comments";
 
 function App() {
   data.comments = data.comments.sort((b, a) => a.score - b.score);
 
   const localComments = getLocalComments();
+  const currentUser = getCurrentUser();
 
-  const [comments, setComments] = useState(localComments.comments);
-  const { currentUser } = localComments;
+  const [comments, setComments] = useState(localComments);
 
   const updateCommentPosition = (comment) => {
     comments.forEach((item, index) => {
