@@ -44,6 +44,39 @@ function App() {
     setLocalComments(comments);
   };
 
+  const deleteComment = (comment) => {
+    let tempComments = comments.filter((item) => item.id !== comment.id);
+    setComments([...tempComments]);
+    setLocalComments(tempComments);
+    window.alert(`Deleted:${comment.content} by @${comment.user.username}`);
+  };
+
+  const deleteReply = (comments, reply) => {
+    console.log(comments);
+    for (let item of comments) {
+      if (!item.replies || !item.replies.length) continue;
+      for (let i = 0; i < item.replies.length; i++) {
+        let tempReply = item.replies[i];
+        if (tempReply.id === reply.id) {
+          item.replies.splice(i, 1);
+          return true;
+        }
+      }
+      if (deleteReply(item.replies, reply)) return true;
+    }
+    return false;
+  };
+
+  const handleDeleteReply = (reply) => {
+    if (!deleteReply(comments, reply)) {
+      alert("Failed to delete the reply");
+      return;
+    }
+    setComments([...comments]);
+    setLocalComments(comments);
+    alert(`Reply is deleted: ${reply.content} by @${reply.user.username}`);
+  };
+
   return (
     <div className="App container h-screen w-screen mx-auto flex flex-col py-4 items-center justify-center">
       <div
@@ -57,6 +90,8 @@ function App() {
             position={index}
             updateCommentPosition={updateCommentPosition}
             updateComment={updateComment}
+            deleteComment={deleteComment}
+            deleteReply={handleDeleteReply}
             currentUser={currentUser}
           />
         ))}

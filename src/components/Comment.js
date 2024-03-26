@@ -4,7 +4,14 @@ import { timeAgo } from "model/util/time";
 import CommentBox from "./CommentBox";
 
 function Comment(props) {
-  const { updateCommentPosition, updateComment, currentUser, comment } = props;
+  const {
+    updateCommentPosition,
+    updateComment,
+    currentUser,
+    comment,
+    deleteComment,
+    deleteReply,
+  } = props;
   const { replies = [] } = comment;
   const [editing, setEditing] = useState(false);
   const [replying, setReplying] = useState(false);
@@ -37,7 +44,7 @@ function Comment(props) {
   };
 
   const handleEditComment = (newCommentValue) => {
-    if (false) return;
+    if (editing === false) return;
     comment.content = newCommentValue;
     updateComment(comment);
     setEditing(false);
@@ -51,8 +58,15 @@ function Comment(props) {
     setReplying(!replying);
   };
 
+  const onDelete = () => {
+    console.log(comment);
+    if (window.confirm("Are you sure you want to delete the comment/Reply?")) {
+      comment.replyingTo ? deleteReply(comment) : deleteComment(comment);
+    }
+  };
+
   const CommentBlock = (
-    <div className="comment my-3 ml-auto rounded-md shadow-md bg-white text-gray-600 p-4 grid grid-cols-2">
+    <div className="comment my-3 w-full ml-auto rounded-md shadow-md bg-white text-gray-600 p-4 grid grid-cols-2">
       <div className="profile-wrapper flex flex-row items-center gap-x-3 mb-4 col-span-2">
         <img className="w-[45px] h-[45px]" src={comment.user.image.png}></img>
         <p className="text-black font-bold">{comment.user.username}</p>
@@ -82,6 +96,7 @@ function Comment(props) {
           label="Delete"
           icon="/images/icon-delete.svg"
           btnClass="text-red-500 font-bold"
+          action={onDelete}
           isVisible={currentUser.username === comment.user.username}
         />
         <ButtonWithIcon
@@ -124,7 +139,9 @@ function Comment(props) {
               position={index}
               updateCommentPosition={updateCommentPosition}
               updateComment={updateComment}
+              deleteComment={deleteComment}
               currentUser={currentUser}
+              deleteReply={deleteReply}
             ></Comment>
           ))}
         </div>

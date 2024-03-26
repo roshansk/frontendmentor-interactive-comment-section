@@ -1,4 +1,3 @@
-import { clear } from "@testing-library/user-event/dist/clear";
 import React, { useState } from "react";
 
 function CommentBox(props) {
@@ -21,7 +20,6 @@ function CommentBox(props) {
 
   const handleAddComment = (event) => {
     event.preventDefault();
-
     const textArea = event.target[0];
 
     if (commentValue && commentValue.length < 3) {
@@ -35,6 +33,7 @@ function CommentBox(props) {
     //editing comment
     if (isReply === false) {
       submitHandler(commentValue);
+      setCommentValue("");
       return;
     }
 
@@ -48,10 +47,11 @@ function CommentBox(props) {
     };
 
     submitHandler(newComment);
+    setCommentValue("");
   };
 
   const handleCommentValueUpdate = (event) => {
-    clearValidityError();
+    clearValidityError(event);
     setCommentValue(event.target.value || "");
   };
 
