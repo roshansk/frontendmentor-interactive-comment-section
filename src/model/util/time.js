@@ -21,7 +21,7 @@ function timeAgo(isoTimestamp) {
   } else if (hours > 0) {
     return hours + `${hours > 1 ? " hours ago" : " hour ago"}`;
   } else if (minutes > 0) {
-    return minutes + `${minutes > 1 ? "mins ago" : " min ago"}`;
+    return minutes + `${minutes > 1 ? " mins ago" : " min ago"}`;
   } else {
     return (seconds || "0") + "s ago";
   }
