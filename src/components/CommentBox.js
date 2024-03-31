@@ -8,7 +8,6 @@ function CommentBox(props) {
     currentComment = "",
   } = props;
 
-  const [submitting, setSubmitting] = useState(false);
   const [commentValue, setCommentValue] = useState(
     isReply ? "" : currentComment
   );
@@ -57,7 +56,7 @@ function CommentBox(props) {
 
   return (
     <form
-      className="comment-box w-full p-6 bg-white rounded-md shadow-md grid grid-cols-2 gap-3 justify-center items-center"
+      className="comment-box w-full p-6 bg-white rounded-md ring ring-1 ring-gray-200 grid grid-cols-2 gap-3 justify-center items-center"
       onSubmit={handleAddComment}
     >
       <textarea

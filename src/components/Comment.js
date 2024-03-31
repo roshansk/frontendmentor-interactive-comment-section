@@ -9,8 +9,7 @@ function Comment(props) {
     updateComment,
     currentUser,
     comment,
-    deleteComment,
-    deleteReply,
+    handleDelete,
   } = props;
   const { replies = [] } = comment;
   const [editing, setEditing] = useState(false);
@@ -38,13 +37,14 @@ function Comment(props) {
   const addReply = (reply) => {
     setReplying(true);
     reply.replyingTo = comment.user.username;
+    comment.replies = comment.replies || [];
     comment.replies.push(reply);
     updateComment(comment);
     setReplying(!replying);
   };
 
   const handleEditComment = (newCommentValue) => {
-    if (editing === false) return;
+    if (editing === false) return; //if null then it's not editing
     comment.content = newCommentValue;
     updateComment(comment);
     setEditing(false);
@@ -59,14 +59,11 @@ function Comment(props) {
   };
 
   const onDelete = () => {
-    console.log(comment);
-    if (window.confirm("Are you sure you want to delete the comment/Reply?")) {
-      comment.replyingTo ? deleteReply(comment) : deleteComment(comment);
-    }
+    handleDelete(comment);
   };
 
   const CommentBlock = (
-    <div className="comment my-3 w-full ml-auto rounded-md shadow-md bg-white text-gray-600 p-4 grid grid-cols-2">
+    <div className="comment my-3 w-full ml-auto rounded-md ring ring-1 ring-gray-200 bg-white text-gray-600 p-4 grid grid-cols-2">
       <div className="profile-wrapper flex flex-row items-center gap-x-3 mb-4 col-span-2">
         <img className="w-[45px] h-[45px]" src={comment.user.image.png}></img>
         <p className="text-black font-bold">{comment.user.username}</p>
@@ -131,19 +128,20 @@ function Comment(props) {
       ) : null}
 
       {replies.length ? (
-        <div className="reply-wrapper w-[95%] ml-auto">
-          {replies.map((reply, index) => (
-            <Comment
-              key={reply.id}
-              comment={reply}
-              position={index}
-              updateCommentPosition={updateCommentPosition}
-              updateComment={updateComment}
-              deleteComment={deleteComment}
-              currentUser={currentUser}
-              deleteReply={deleteReply}
-            ></Comment>
-          ))}
+        <div className="pseduo-wrapper w-[92%] ml-auto">
+          <div className="reply-wrapper">
+            {replies.map((reply, index) => (
+              <Comment
+                key={reply.id}
+                comment={reply}
+                position={index}
+                updateCommentPosition={updateCommentPosition}
+                updateComment={updateComment}
+                currentUser={currentUser}
+                handleDelete={handleDelete}
+              ></Comment>
+            ))}
+          </div>
         </div>
       ) : null}
     </>
