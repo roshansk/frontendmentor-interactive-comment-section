@@ -6,3 +6,78 @@
   background-color : hsl(238, 40%, 52%)
 }
 
+.btn-bg-light-red{
+  background-color: hsl(358, 79%, 66%)
+}
+
+.btn-bg-light-gray{
+  background-color: hsl(223, 19%, 93%)
+}
+
+.modal{
+  z-index: 1001;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.pseduo-wrapper{
+  position: relative;
+}
+
+.reply-wrapper::after{
+  position: absolute;
+  top:2%;
+  left:min(-2%,-15px);
+  content: "";
+  width: 2px;
+  height: 95%;
+  background-color: #d5d5d5;
+  border-radius: 10%;
+}
+
+.comment-section-wrapper{
+  overflow-y: scroll;
+}
+
+.comment-section-wrapper::-webkit-scrollbar{
+  background-color: #e5e5e5;
+  width: 5px;
+  border-radius: 10px;
+  padding-right: 3rem;
+}
+
+.comment-section-wrapper::-webkit-scrollbar-thumb{
+  background-color: #ccc;
+  width: 5px;
+  border-radius: 10px;
+  padding-right: 3rem;
+}
+
+.comment-section-wrapper::-webkit-scrollbar{
+  background-color: #e5e5e5;
+  width: 5px;
+  height: 5px;
+  border-radius: 10px;
+  padding-right: 3rem;
+}
+
+.comment-section-wrapper::-webkit-scrollbar-thumb{
+  background-color: #ccc;
+  width: 5px;
+  border-radius: 10px;
+  padding-right: 3rem;
+}
+
+@media only screen and (max-width:374px) {
+  .comment-section-wrapper{
+    overflow-x: scroll;
+  }
+}
