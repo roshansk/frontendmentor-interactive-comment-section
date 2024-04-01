@@ -68,7 +68,7 @@ function CommentBox(props) {
         required
       ></textarea>
       <div className="col-span-1 mr-auto">
-        <img className="h-[40px] w-[40px]" src={currentUser.image.png}></img>
+        <img className="h-[40px] w-[40px]" alt="user profile" src={currentUser.image.png}></img>
       </div>
       <button
         type="submit"

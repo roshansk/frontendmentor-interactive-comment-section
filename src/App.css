@@ -35,7 +35,7 @@
 .reply-wrapper::after{
   position: absolute;
   top:2%;
-  left:min(-2%,-15px);
+  left:min(-5%,-15px);
   content: "";
   width: 2px;
   height: 95%;
@@ -76,8 +76,29 @@
   padding-right: 3rem;
 }
 
+.btn-upvote:hover svg path{
+  fill: hsl(238, 40%, 52%);
+}
+
+.btn-downvote:hover svg path{
+  fill: hsl(238, 40%, 52%);
+}
+
+
+.btn-delete:hover svg path{
+  background-color: hsl(238, 40%, 52%);
+}
+
+.btn-action:hover::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
 @media only screen and (max-width:374px) {
   .comment-section-wrapper{
     overflow-x: scroll;
   }
 }
+
