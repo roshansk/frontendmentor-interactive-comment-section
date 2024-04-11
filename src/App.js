@@ -93,7 +93,7 @@ function App() {
           setCommentToDelete(null);
         }}
       />
-      <div className="comment-section-wrapper w-[95%] h-max-[560px] flex flex-col mx-auto px-2 py-2 items-end">
+      <div className="comment-section-wrapper w-[95%] h-max-[560px] flex flex-col mx-auto px-2 py-2 items-end lg:w-[80%] xl:w-[55%]">
         {comments.map((comment, index) => (
           <Comment
             key={comment.id}
@@ -106,7 +106,10 @@ function App() {
           />
         ))}
       </div>
-      <div id="comment-box-wrapper" className="w-[95%] mt-3 px-2">
+      <div
+        id="comment-box-wrapper"
+        className="w-[95%] mt-3 px-2 lg:w-[80%] xl:w-[55%]"
+      >
         <CommentBox
           comments={comments}
           currentUser={currentUser}
