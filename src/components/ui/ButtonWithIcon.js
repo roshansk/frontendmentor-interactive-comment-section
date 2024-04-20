@@ -10,7 +10,7 @@ function ButtonWithIcon(props) {
     isVisible = true,
   } = props;
 
-  const iconImage = <img className="w-100 mx-1 my-auto" src={icon}></img>;
+  const iconImage = <img className="w-100 mx-1 my-auto" alt="button icon" src={icon}></img>;
   let defaultBtnClass = `flex flex-row justify-center items-center p-1 m-1 ${btnClass} ${
     isVisible ? "" : "hidden"
   }`;
