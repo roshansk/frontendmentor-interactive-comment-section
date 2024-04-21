@@ -100,21 +100,21 @@ function Comment(props) {
       <div className="actions flex-auto flex flex-row justify-end col-span-1 gap-x-1 md:order-3 md:col-span-2 md:row-span-1 md:mb-auto md:ml-auto">
         <ButtonWithIcon
           label="Delete"
-          icon="/images/icon-delete.svg"
+          icon="./images/icon-delete.svg"
           btnClass="btn-action text-red-500 font-bold hover:opacity-[0.65]"
           action={onDelete}
           isVisible={currentUser.username === comment.user.username}
         />
         <ButtonWithIcon
           label="Edit"
-          icon="/images/icon-edit.svg"
+          icon="./images/icon-edit.svg"
           btnClass="btn-action blue-accent-text font-bold hover:opacity-[0.65]"
           action={onEdit}
           isVisible={currentUser.username === comment.user.username}
         />
         <ButtonWithIcon
           label="Reply"
-          icon="/images/icon-reply.svg"
+          icon="./images/icon-reply.svg"
           btnClass="btn-action blue-accent-text font-bold hover:opacity-[0.65]"
           action={onReply}
           isVisible={currentUser.username !== comment.user.username}

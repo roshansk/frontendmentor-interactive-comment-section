@@ -1,5 +1,6 @@
 {
-  "name": "src",
+  "homepage": "https://roshansk.github.io/frontendmentor-interactive-comment-section",
+  "name": "frontendmentor-interactive-comment-section",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
